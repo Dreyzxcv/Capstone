@@ -1,0 +1,79 @@
+export interface User {
+    id: number;
+    name: string;
+    email: string;
+    email_verified_at?: string;
+    roles: string[];
+    permissions: string[];
+}
+
+export type PageProps<
+    T extends Record<string, unknown> = Record<string, unknown>,
+> = T & {
+    auth: {
+        user: User | null;
+    };
+    flash: {
+        success?: string;
+        error?: string;
+    };
+};
+
+export interface Asset {
+    id: number;
+    asset_code: string;
+    type: string;
+    species: string | null;
+    description: string | null;
+    municipality_of_origin: string;
+    location_apprehended: string;
+    apprehending_agency: string;
+    mode: string;
+    has_ongoing_case: boolean;
+    has_confiscation_order: boolean;
+    current_status: string;
+    qr_code_token: string;
+    created_at: string;
+    creator?: User;
+    acknowledgement_receipt?: AcknowledgementReceipt;
+    status_history?: StatusHistoryEntry[];
+    jev?: Jev;
+    disposal?: Disposal;
+    qr_scans?: QrScan[];
+}
+
+export interface AcknowledgementReceipt {
+    id: number;
+    receipt_number: string;
+    signed_at: string | null;
+    pdf_path: string | null;
+    signed_by_custodian?: User;
+}
+
+export interface StatusHistoryEntry {
+    id: number;
+    status: string;
+    notes: string | null;
+    changed_at: string;
+    changed_by?: User;
+}
+
+export interface Jev {
+    id: number;
+    jev_number: string;
+    pdf_path: string | null;
+}
+
+export interface Disposal {
+    id: number;
+    disposal_type: string;
+    processed_at: string;
+}
+
+export interface QrScan {
+    id: number;
+    scan_location_note: string | null;
+    resulting_status: string;
+    scanned_at: string;
+    scanned_by?: User;
+}
