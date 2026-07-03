@@ -36,7 +36,7 @@ export default function AssetsShow({ asset, qrPayload, qrSvg, can }: ShowProps) 
             if (!svg.getAttribute('width')) svg.setAttribute('width', '160');
             if (!svg.getAttribute('height')) svg.setAttribute('height', '160');
             // some user-agents may treat injected SVG as inline; make it block for predictable layout
-            (svg as HTMLElement).style.display = 'block';
+            svg.style.display = 'block';
         }
     }, [qrSvg]);
     const jevForm = useForm({ jev_number: '' });
